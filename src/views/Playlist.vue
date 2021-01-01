@@ -1,0 +1,112 @@
+<template>
+  <div class="container" v-if="loading==true">
+      <div class="row">
+         <div class="col-md-12 col-12">
+           <div class="col-12" ><h2 class="jsonItems">PlayList</h2></div>
+            <div class="table-responsive" id="playlist">
+               <table class="table">
+                  <thead >
+                     <tr>
+                        <th scope="col-lg-4 col-sm-1"></th>
+                        <th scope="col-lg-2 col-sm-1">Canción</th>
+                        <th scope="col-lg-2 col-sm-1">Artista</th>
+                        <th scope="col-lg-3 col-sm-1">Álbum</th>
+                        <th scope="col-lg-2 col-sm-1">D.</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr v-for="data in lista" v-bind:key="data.id">
+                       <td><img :src="data.album.cover_small" /></td>
+                        <th>{{ data.title}}</th>
+                        <td>{{ data.artist.name }}</td>
+                        <td>{{ data.album.title }}</td>
+                        <td>{{ data.duration }}</td>
+                        
+                     </tr>
+                  </tbody>
+               </table>
+ 
+            </div>
+         </div>
+      </div>
+   </div>
+   <div v-else>
+      <h1>LOADING...</h1>
+   </div>
+</template>
+<script>
+import * as api from '../api.js';
+export default {
+  
+    name: 'playlist',
+  
+   data: function (){
+      return {
+      lista:[],
+      loading: false
+      }
+   },
+   methods: {
+      getImage(item) {
+         return require(item.img);
+      },
+
+      async getPlay(){ 
+         
+         try{
+         this.lista = await api.getPlayList(this.$route.params.playlistID)
+         console.log(this.lista)
+         this.loading = true
+         }catch(error){
+            console.log(error)
+            this.loading= false;
+         }
+      },
+     
+  
+   },
+   created() {
+      this.getPlay();
+   }
+}
+</script>
+<style scoped>
+  .container{
+     margin-top: 150px;
+      width: 100%;
+      height: 100%;
+      background-color: white;
+  }
+  .img-album {
+    height: 130px;
+    width: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid #a09898;
+  }
+  .title-album {
+    font-family: 'Spartan', sans-serif;
+    font-weight: 400;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    margin-top: 15px;
+    text-align: center; 
+  }
+  .tracks-album{
+    color: #838383; 
+    font-family: 'Spartan', sans-serif;
+    font-weight: 400;
+    text-align: left;
+  }
+  .table{
+    margin-top: 20px;
+  }
+ .jsonItems{
+    font-weight: bold;
+    margin-left:20px;
+    margin-bottom: 20px;
+    margin-top:20px;
+}
+</style>
