@@ -5,8 +5,7 @@
         :on-cancel="onCancel"
         :is-full-page="fullPage"></loading>
     <div>
-        <b-card
-            v-for="data in lista.slice(0,1)" v-bind:key="data.id"
+        <b-card 
             overlay
             img-src="https://picsum.photos/900/250/?image=3"
             img-alt="Card Image"
@@ -15,13 +14,14 @@
             sub-title="Subtitle"
         >
             <b-card-text>
-            Some quick example text to build on the card and make up the bulk of the card's content.
+            
             </b-card-text>
         </b-card>
     </div>
       <div class="row">
          <div class="col-md-12 col-12">
-           <div class="col-12" ><h2 class="jsonItems">{{artistName}}</h2></div>
+           <div class="col-12" v-for="data in lista.slice(0,1)" v-bind:key="data.id" 
+           ><h2 class="jsonItems">{{data.artist.name}}</h2></div>
             <div class="table-responsive" id="artist">
                <table class="table">
                   <thead >
@@ -68,7 +68,7 @@ export default {
         lista:[],
         isloading: false,
         fullPage: true,
-        artistName: String,
+        n: String
       }
    },
     created() {
@@ -84,9 +84,10 @@ export default {
          this.isLoading = true
          try{
             this.lista = await api.getArtistByID(this.$route.params.artistID)
+            for(let i = 0; i<= 1; i++){
+               this.n= this.lista[i].artist.name
+            }
             console.log(this.lista)
-            this.artistName = this.lista.artist.name
-            console.log(this.lista.artist.name)
             this.isloading = false
          }catch(error){
             console.log(error)
@@ -95,9 +96,11 @@ export default {
       },
       async getArtist(){ 
          this.isLoading = true
+         
          try{
-            this.artist = await api.getArtist(this.$route.params.artistID)
+            this.artist = await api.getArtist(this.n)
             console.log(this.artist)
+            console.log(this.artistName)
             this.isloading = false
          }catch(error){
             console.log(error)

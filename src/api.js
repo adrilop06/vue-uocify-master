@@ -32,7 +32,7 @@ export async function getArtistByID(param){
     return r.data
 }        
 export async function getArtist(param){ 
-    let t = await fetch("https://cors-anywhere.herokuapp.com/https://api.deezer.com/artist" + param)
+    let t = await fetch("https://cors-anywhere.herokuapp.com/https://api.deezer.com/search/artist?q=" + param)
     let r = await t.json()
     return r.data
 }
