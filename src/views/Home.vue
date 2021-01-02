@@ -1,12 +1,17 @@
 <template>
     <main class="page-home">
-        <div class="container">
+        <div class="container"  v-if="this.isLogged==true">
             <img class="logo" src="@/assets/icon.svg" alt="logo">
             <h1 class="main-title">¿En busca de música?</h1>
             <p class="lorem-textum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tellus arcu, feugiat eu molestie in, finibus sit amet lorem. Phasellus consectetur ipsum in imperdiet ultrices. </p>
-            <div v-if="this.isLogged==true">
             <playlists></playlists>
-            </div>
+        </div>
+            
+        <div v-else>
+            <img class="logo" src="@/assets/icon.svg" alt="logo">
+            <h1 class="main-title">¿En busca de música?</h1>
+            <p class="lorem-textum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tellus arcu, feugiat eu molestie in, finibus sit amet lorem. Phasellus consectetur ipsum in imperdiet ultrices. </p>
+            
         </div>
     </main>
 </template>
