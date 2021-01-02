@@ -1,5 +1,9 @@
 <template>
-  <div class="container" v-if="loading==true">
+  <div class="container">
+      <loading :active.sync="isloading" 
+        :can-cancel="true" 
+        :on-cancel="onCancel"
+        :is-full-page="fullPage"></loading>
       <div class="row">
          <div class="col-md-12 col-12">
            <div class="col-12" ><h2 class="jsonItems">PlayList</h2></div>
@@ -30,20 +34,24 @@
          </div>
       </div>
    </div>
-   <div v-else>
-      <h1>LOADING...</h1>
-   </div>
+ 
 </template>
 <script>
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
 import * as api from '../api.js';
 export default {
   
     name: 'playlist',
-  
+   
+   components: {
+            Loading
+        },
    data: function (){
       return {
       lista:[],
-      loading: false
+      isloading: false,
+      fullPage: true
       }
    },
    methods: {
@@ -52,16 +60,20 @@ export default {
       },
 
       async getPlay(){ 
-         
+         this.isLoading = true
          try{
          this.lista = await api.getPlayList(this.$route.params.playlistID)
          console.log(this.lista)
-         this.loading = true
+         this.isloading = false
          }catch(error){
             console.log(error)
-            this.loading= false;
+            this.isloading= false;
          }
       },
+       onCancel() {
+              console.log('User cancelled the loader.'),
+              this.isloading=false
+            }
      
   
    },

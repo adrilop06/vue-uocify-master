@@ -1,5 +1,9 @@
 <template>
     <main class="page-search">
+        <loading :active.sync="isloading" 
+        :can-cancel="true" 
+        :on-cancel="onCancel"
+        :is-full-page="fullPage"></loading>
         <h1 class="main-title">Resultados de <span>{{query}}</span></h1>
         <b-tabs>
             <b-tab id="tabAll" title="Todo" active>
@@ -30,7 +34,8 @@
 </template>
 
 <script>
-
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
 import TrackList from '@/components/Tracks/TrackList'
 import AlbumList from '@/components/Albums/AlbumList'
 import ArtistList from '@/components/Artists/ArtistList'
@@ -38,12 +43,15 @@ import * as api from '../api.js'
 
 export default {
     name:'SearchResults',
-    components:{ AlbumList, ArtistList, TrackList },
+    components:{ AlbumList, ArtistList, TrackList,Loading },
+   
     data(){
         return{
             tracks: [],
             albums: [],
             artists: [],
+            isloading: false,
+            fullPage: true,
             query: this.$route.params.q || ''
         }
     }, 
@@ -60,35 +68,46 @@ export default {
     },
      methods:{
         async updateTracks(){ 
+            this.isLoading = true
             try{
                 this.tracks = await api.getTrack(this.query)
-                
+                this.isLoading = false
                 
             }catch(error){
                     console.log(error)
+                    this.isLoading = false
             }
         },
          async updateAlbums(){ 
+             this.isLoading = true
             try{
                 this.albums = await api.getAlbums(this.query)
-                
+                this.isLoading = false
             }catch(error){
                     console.log(error)
+                    this.isLoading = false
             }
         },
          async updateArtists(){ 
+             this.isLoading = true
             try{
                 this.artists = await api.getArtists(this.query)
-                
+                this.isLoading = false 
             }catch(error){
                     console.log(error)
+                    this.isLoading = false
             }
         },
-        search(){
+        async search(){
             this.updateTracks();
             this.updateAlbums();
-            this.updateArtists();
-        }, 
+            this.updateArtists();   
+        },
+        onCancel() {
+              console.log('User cancelled the loader.')
+              this.isloading=false
+        },
+        
     }
      
    
