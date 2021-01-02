@@ -37,7 +37,8 @@ export default {
     return {
       email: '',
       password: '',
-      error:''
+      error:'',
+     
     };
   },
   methods: {
@@ -49,6 +50,7 @@ export default {
           data => {
             console.log(`Sesión iniciada correctamente con el correo: ${data.user.email}`);
             this.$router.push("/");
+            
           },
           err => {
             this.error = err.message;
