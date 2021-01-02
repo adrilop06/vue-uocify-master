@@ -10,7 +10,7 @@
                 <span class="user-name">{{currentUser}}</span> 
                 <fa-icon icon="user" class="icon" />
 
-                <button v-on:click="logout" class="btn-icon"><fa-icon icon="sign-out-alt" class="sign-out" /></button>
+                <button v-on:click="logout" class="btn-icon" aria-label="search"><fa-icon icon="sign-out-alt" class="sign-out" /></button>
             </div>
 
             <ul v-if="!isLoggedIn" class="session">

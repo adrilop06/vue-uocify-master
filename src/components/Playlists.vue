@@ -16,7 +16,7 @@
                   </thead>
                   <tbody>
                      <tr v-for="data in lista" v-bind:key="data.id">
-                       <td><img :src="data.picture_small" /></td>
+                       <td><img :src="data.picture_small" :alt="data.title"/></td>
                         <th><router-link v-bind:to="'/playlist/'+ data.id">{{ data.title}}</router-link></th>
                         <td>{{ data.user.name }}</td>
                         <td>{{ data.nb_tracks }}</td>

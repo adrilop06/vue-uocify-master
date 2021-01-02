@@ -16,7 +16,7 @@
                   </thead>
                   <tbody>
                      <tr v-for="data in lista" v-bind:key="data.id">
-                       <td><img :src="data.album.cover_small" /></td>
+                       <td><img :src="data.album.cover_small" :alt="data.title"/></td>
                         <th>{{ data.title}}</th>
                         <td>{{ data.artist.name }}</td>
                         <td>{{ data.album.title }}</td>
