@@ -4,27 +4,41 @@
         :can-cancel="true" 
         :on-cancel="onCancel"
         :is-full-page="fullPage"></loading>
+    <div>
+        <b-card
+            v-for="data in lista.slice(0,1)" v-bind:key="data.id"
+            overlay
+            img-src="https://picsum.photos/900/250/?image=3"
+            img-alt="Card Image"
+            text-variant="white"
+            title="h"
+            sub-title="Subtitle"
+        >
+            <b-card-text>
+            Some quick example text to build on the card and make up the bulk of the card's content.
+            </b-card-text>
+        </b-card>
+    </div>
       <div class="row">
          <div class="col-md-12 col-12">
-           <div class="col-12" ><h2 class="jsonItems">PlayList</h2></div>
-            <div class="table-responsive" id="playlist">
+           <div class="col-12" ><h2 class="jsonItems">{{artistName}}</h2></div>
+            <div class="table-responsive" id="artist">
                <table class="table">
                   <thead >
                      <tr>
-                        <th scope="col-lg-4 col-sm-1"></th>
-                        <th scope="col-lg-2 col-sm-1">Canción</th>
-                        <th scope="col-lg-2 col-sm-1">Artista</th>
+                        <th scope="col-lg-2 col-sm-1"></th>
+                        <th scope="col-lg-2 col-sm-1">Canciones</th>
                         <th scope="col-lg-3 col-sm-1">Álbum</th>
                         <th scope="col-lg-2 col-sm-1">D.</th>
                      </tr>
                   </thead>
                   <tbody>
                      <tr v-for="data in lista" v-bind:key="data.id">
-                       <td><img :src="data.album.cover_small" :alt="data.title"/></td>
-                        <th>{{ data.title}}</th>
-                        <td><router-link v-bind:to="'/artist/'+ data.artist.id">{{ data.artist.name }}</router-link></td>
-                        <td>{{ data.album.title }}</td>
-                        <td>{{ data.duration }}</td>
+                        <td><img :src="data.album.cover_small" :alt="data.album.title"/></td>
+                        <th>{{data.title}}</th>
+                        <th>{{data.album.title}}</th>
+                        <th>{{data.duration | duration}}</th>
+                        
                         
                      </tr>
                   </tbody>
@@ -42,17 +56,24 @@ import 'vue-loading-overlay/dist/vue-loading.css';
 import * as api from '../api.js';
 export default {
   
-    name: 'playlist',
+    name: 'artist',
    
    components: {
             Loading
         },
+   
    data: function (){
       return {
-      lista:[],
-      isloading: false,
-      fullPage: true
+        artist:[],
+        lista:[],
+        isloading: false,
+        fullPage: true,
+        artistName: String,
       }
+   },
+    created() {
+      this.getPlay();
+      this.getArtist();
    },
    methods: {
       getImage(item) {
@@ -62,9 +83,22 @@ export default {
       async getPlay(){ 
          this.isLoading = true
          try{
-         this.lista = await api.getPlayList(this.$route.params.playlistID)
-         console.log(this.lista)
-         this.isloading = false
+            this.lista = await api.getArtistByID(this.$route.params.artistID)
+            console.log(this.lista)
+            this.artistName = this.lista.artist.name
+            console.log(this.lista.artist.name)
+            this.isloading = false
+         }catch(error){
+            console.log(error)
+            this.isloading= false;
+         }
+      },
+      async getArtist(){ 
+         this.isLoading = true
+         try{
+            this.artist = await api.getArtist(this.$route.params.artistID)
+            console.log(this.artist)
+            this.isloading = false
          }catch(error){
             console.log(error)
             this.isloading= false;
@@ -77,9 +111,7 @@ export default {
      
   
    },
-   created() {
-      this.getPlay();
-   }
+  
 }
 </script>
 <style scoped>

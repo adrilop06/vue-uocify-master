@@ -6,6 +6,7 @@ import Login from '@/views/Login'
 import Register from '@/views/Register'
 import NotFound from '@/views/NotFound'
 import Playlist from '@/views/Playlist'
+import Artist from '@/views/Artist'
 
 Vue.use(VueRouter)
 
@@ -39,7 +40,12 @@ Vue.use(VueRouter)
     path: '/playlist/:playlistID',
     name: 'playlist',
     component: Playlist,
-  },    
+  },   
+  {
+    path: '/artist/:artistID',
+    name: 'artist',
+    component: Artist,
+  },   
 ]
 
 const router = new VueRouter({

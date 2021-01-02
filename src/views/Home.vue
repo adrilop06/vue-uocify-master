@@ -39,7 +39,7 @@ import firebase from 'firebase'
                 user => {
                     if (user) {
                     this.isLogged = true
-                     console.log("yes")
+                     console.log("user logged")
                      } else {
                     this.isLogged = false
                     reject('There is no user');
