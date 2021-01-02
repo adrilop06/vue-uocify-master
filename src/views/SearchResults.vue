@@ -34,25 +34,11 @@
     </main>
     </div>
     <div v-else>
-         <main class="page-search">
-       <div>
-        <b-card
-            title="¿Aún no estas registrado?"
-            img-src="https://www.bensound.com/bensound-img/hipjazz.jpg"
-            img-alt="Imagen música"
-            img-top
-            tag="article"
-            style="max-width: 20rem;"
-            class="mb-2 text-center "
-            
-        >
-            <b-card-text>
-            No pierdas más tiempo y disfruta de tú música favorita GRATIS
-            </b-card-text>
-
-            <b-button href="/register" variant="primary">Voy a registrarme!</b-button>
-        </b-card>
-        
+        <main class="page-home">
+         <div class="container">
+            <img class="logo" src="@/assets/icon.svg" alt="logo">
+            <h1 class="main-title">¿Aún no estás registrado?</h1>
+            <p class="lorem-textum">No pierdas más tiempo y registrate!</p>
         </div>
         </main>
     </div>
@@ -166,7 +152,19 @@ export default {
 
 
 <style lang="scss" >
-   
+     .page-home{
+        text-align: center;
+        padding-left:30px;
+        padding-right:30px;
+
+        .logo{
+            width: 200px;
+            margin-top: 35px;
+            margin-bottom: 35px;
+        }
+
+        
+    }
     .page-search{
         display: flex;
         flex-direction: column;
