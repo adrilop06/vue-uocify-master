@@ -1,5 +1,6 @@
 <template>
     <main class="page-home">
+        <!-- En función de si el usuario esta logeado o no, mostraremos una cosa u otra -->
         <div class="container"  v-if="this.isLogged==true">
             <img class="logo" src="@/assets/icon.svg" alt="logo">
             <h1 class="main-title">¿En busca de música?</h1>
@@ -32,6 +33,7 @@ import firebase from 'firebase'
             this.IsLoggedIn();
         },
         methods:{
+            /*Comprobamos que el usuario está logeado para dejarle acceder a las funciones */
                async IsLoggedIn() {
             try {
                 await new Promise((resolve, reject) =>

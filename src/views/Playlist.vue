@@ -4,6 +4,7 @@
         :can-cancel="true" 
         :on-cancel="onCancel"
         :is-full-page="fullPage"></loading>
+      
       <div class="row">
          <div class="col-md-12 col-12">
            <div class="col-12" ><h2 class="jsonItems">PlayList</h2></div>
@@ -21,9 +22,11 @@
                   <tbody>
                      <tr v-for="data in lista" v-bind:key="data.id">
                        <td><img :src="data.album.cover_small" :alt="data.title"/></td>
-                        <th>{{ data.title}}</th>
+                        <th >{{ data.title}}</th>
+                        <!--Cambiamos a la dirección que indica el router añadiendo la id del artista  -->
                         <td><router-link v-bind:to="'/artist/'+ data.artist.id">{{ data.artist.name }}</router-link></td>
                         <td>{{ data.album.title }}</td>
+                        <!-- cambiamos el formato de los datos recibidos para mostrarlos mm:ss -->
                         <td>{{ data.duration | duration }}</td>
                         
                      </tr>
@@ -33,6 +36,7 @@
             </div>
          </div>
       </div>
+      
    </div>
    
 </template>
@@ -51,33 +55,21 @@ export default {
         },
    data: function (){
       return {
-      current: {},
+         /*array contenedor de los datos json recibidos de la api */
       lista:[],
+      
+      /*variables que manejarán la animación de loading */
       isloading: false,
       fullPage: true,
-      player: new Audio(),
-      isPlaying: false
       }
    },
    methods: {
-      
-      play(song) {
-         if (typeof song.src !== "undefined" && song.id != this.current) {
-            this.current = song;
-            this.player.src = this.current.src;
-         }
-            this.player.play();
-            this.isPlaying = true;
-
-      },
-      pause() {
-            this.player.pause();
-            this.isPlaying = false;
-      },
+    
       getImage(item) {
          return require(item.img);
       },
-
+      /* Esta función utilizará la función contenida en la api insertandole los parametros
+      de playlistID, los cuales se obtendrán mediante el router al hacer click en la lista */
       async getPlay(){ 
          this.isLoading = true
          try{
@@ -89,6 +81,7 @@ export default {
             this.isloading= false;
          }
       },
+      
        onCancel() {
               console.log('User cancelled the loader.'),
               this.isloading=false
@@ -98,7 +91,10 @@ export default {
    },
    created() {
       this.getPlay();
-   }
+     
+      
+   },
+ 
 }
 </script>
 <style scoped>

@@ -7,12 +7,15 @@
             {{track.title}}
         </td>
         <td class="track-artist">
-            {{track.artist.name}}
+            <!-- Redirigimos al usuario al hacer click hacia la página artist.vue -->
+            <!-- Para ello usamos la dirección creada en el router y el id del artista -->
+             <router-link v-bind:to="'/artist/'+ track.artist.id">{{track.artist.name}}</router-link>
         </td>
         <td class="track-album">
             {{track.album.title}}
         </td>
         <td class="track-duration">
+            <!-- empleamos el filtro duration para convertir las cifras en formato mm:ss -->
             {{track.duration | duration }}
         </td>                                
     </tr>

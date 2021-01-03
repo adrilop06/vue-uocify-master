@@ -59,12 +59,20 @@ export default {
    
     data(){
         return{
+            /* valores qeu usaremos como variables:
+            tracks, album y artists son los contenedores de los archivos json recibidos al llamar a la api.*/
             tracks: [],
             albums: [],
             artists: [],
+            /*isloading es una variable creada para saber si se ha cargado el contenido de la api. Esto
+            nos permite hacer funcionar una animación de loading para que el usuario sepa 
+            que se esta cargando el contenido. fullPage nos sirve para que dicha animación ocupe toda la página*/
             isloading: false,
             fullPage: true,
+            /*isLogged es creada para almacenar si el usuario está logeado o no. De esta manera podemos bloquear
+            ciertas funciones que solo se muestran cuando estas login*/
             isLogged:false,
+            /*obtenemos el valor de la consulta en el buscador*/
             query: this.$route.params.q || ''
         }
     }, 
@@ -80,6 +88,9 @@ export default {
         this.search();
     },
      methods:{
+         /*Estas funciones insertan el valor de la consulta en la función que realiza la llamada
+            , la cual se encuentra en api.js. Estas funciones son async dado que debemos esperar
+            que el contenido se carge para que se ejecuten*/
         async updateTracks(){ 
             this.isLoading = true
             try{
@@ -111,16 +122,20 @@ export default {
                     this.isLoading = false
             }
         },
+        /*Llamamos a todas las funciones desde una sola, de esta manera ejecutamos todas a la vez */
         async search(){
             this.IsLoggedIn(); 
             this.updateTracks();
             this.updateAlbums();
             this.updateArtists();   
         },
+        /*Nos sirve para cancelar la carga de datos si el usuario pulsa la pantalla */
         onCancel() {
-              console.log('User cancelled the loader.')
+              
               this.isloading=false
         },
+        /*Llamamos a firebase para que compuebe si el usuario esta logeado.En este caso cambiamos
+        el valor de la variable*/
         async IsLoggedIn() {
             try {
                 await new Promise((resolve, reject) =>
@@ -128,7 +143,7 @@ export default {
                 user => {
                     if (user) {
                     this.isLogged = true
-                     console.log("yes")
+                     console.log("User is logged")
                      } else {
                     this.isLogged = false
                     reject('There is no user');

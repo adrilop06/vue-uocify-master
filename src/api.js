@@ -41,3 +41,4 @@ export async function getArtistComments(param){
     let r = await t.json()
     return r.data
 }
+

@@ -1,7 +1,7 @@
 <template>
     <article class="artist col-sm-6 col-md-4 col-lg-3 col-xl-2">
-        <img class="artist-picture" :src="artist.picture_medium" :alt="artist.name">
-        <span class="artist-name">{{artist.name}}</span>
+        <router-link v-bind:to="'/artist/'+ artist.id"><img class="artist-picture" :src="artist.picture_medium" :alt="artist.name"></router-link>
+        <span class="artist-name"><router-link v-bind:to="'/artist/'+ artist.id">{{artist.name}}</router-link></span>
         <span class="artist-fans">{{artist.nb_fan | number}} fans</span>
     </article>
 </template>

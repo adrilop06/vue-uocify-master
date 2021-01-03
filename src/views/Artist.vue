@@ -1,9 +1,13 @@
 <template>
   <div class="container">
+     <!-- Componente para mostrar la animación de caragando -->
       <loading :active.sync="isloading" 
         :can-cancel="true" 
         :on-cancel="onCancel"
         :is-full-page="fullPage"></loading>
+        <!-- Contenedor con el nombre del artista y su imagen. Para acceder a los datos json
+        debemos recorrer el array. Dado que el array contiene el mismo artista, con recorrerlo
+        solo una vez nos es suficiente para agarrar los datos necesarios -->
    <div class="col-12" v-for="data in artist.slice(0,1)" v-bind:key="data.id" >
       <h2 class="jsonItems text-center">{{data.artist.name}}</h2>
       <img :src="data.artist.picture_big" :alt="data.title" class="img-artist" />
@@ -35,12 +39,19 @@
             </div>
          </div>
       </div>
+      <!-- Contenedor con los comentarios de los usuarios. Para mostrarlos accedemos al array comments,
+      donde almacenamos los datos y lo recorremos 6 veces, de esta manera ese será el número de items que
+      mostraremos-->
       <div class="col-12" style= "margin-top:50px; margin-left:40px;" v-for="data in comments.slice(0,6)" v-bind:key="data.id" >
-         
+         <!-- Empleamos el componente b-card para crear una especia de composición con tarjetas que contendrán
+         nombre, imagen y comentario de los usuarios -->
          <b-card class="mb-2 caja" style="max-width: 20rem;">
+            <!-- Usamos los avatares de los usuarios -->
             <img :src="data.author.picture_small" :alt="data.author.name" class="cards"/>
+            <!-- Usamos los nombres de los usuarios -->
             <p class="jsonItems text-center">{{data.author.name}}</p>
                <b-card-text>
+                  <!-- Mostramos los mensajes de los usuarios -->
                   <p class="jsonItems text-center">{{data.text}}</p>
                </b-card-text>
          </b-card>
@@ -77,7 +88,7 @@ export default {
       getImage(item) {
          return require(item.img);
       },
-
+      /*Hacemos la llamada y almacenamos los datos del artista en lista */
       async getPlay(){ 
          this.isloading = true
          try{
@@ -90,6 +101,7 @@ export default {
             
          }
       },
+      /*Obtenemos los datos de artist */
        async getArtist(){ 
          this.isloading = true
          try{
@@ -101,6 +113,7 @@ export default {
             this.isloading= false;
          }
       },
+      /*Obtenemos los datos de los comentarios y los almacenamos */
         async getArtistComment(){ 
          this.isloading = true
          try{
@@ -112,12 +125,14 @@ export default {
             this.isloading= false;
          }
       }, 
+      /* Introducimos todas las llamadas en una sola función para ejecutarlas a la vez */
          callFunctions(){
                this.getPlay();
                this.getArtist()
                this.getArtistComment()
                
          },
+         /*Cancela la pantalla de carga si el usuario pulsa */
        onCancel() {
               console.log('User cancelled the loader.'),
               this.isloading=false
