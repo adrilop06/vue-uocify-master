@@ -65,7 +65,7 @@ export default {
    },
    methods: {
     
-      getImage(item) {
+      getImage(item){
          return require(item.img);
       },
       /* Esta función utilizará la función contenida en la api insertandole los parametros
