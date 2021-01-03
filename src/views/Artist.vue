@@ -4,13 +4,12 @@
         :can-cancel="true" 
         :on-cancel="onCancel"
         :is-full-page="fullPage"></loading>
-    <div class="col-12" v-for="data in artist.slice(0,1)" v-bind:key="data.id" >
-        <img :src="data.artist.picture_big" :alt="data.title" class=" card"/>
-    </div>
+   <div class="col-12" v-for="data in artist.slice(0,1)" v-bind:key="data.id" >
+      <h2 class="jsonItems text-center">{{data.artist.name}}</h2>
+      <img :src="data.artist.picture_big" :alt="data.title" class="img-artist" />
+   </div>
       <div class="row">
          <div class="col-md-12 col-12">
-           <div class="col-12" v-for="data in lista.slice(0,1)" v-bind:key="data.id" 
-           ><h2 class="jsonItems">{{data.artist.name}}</h2></div>
             <div class="table-responsive" id="artist">
                <table class="table">
                   <thead >
@@ -36,6 +35,17 @@
             </div>
          </div>
       </div>
+      <div class="col-12" style= "margin-top:50px; margin-left:40px;" v-for="data in comments.slice(0,6)" v-bind:key="data.id" >
+         
+         <b-card class="mb-2 caja" style="max-width: 20rem;">
+            <img :src="data.author.picture_small" :alt="data.author.name" class="cards"/>
+            <p class="jsonItems text-center">{{data.author.name}}</p>
+               <b-card-text>
+                  <p class="jsonItems text-center">{{data.text}}</p>
+               </b-card-text>
+         </b-card>
+         
+   </div>
    </div>
  
 </template>
@@ -53,7 +63,7 @@ export default {
    
    data: function (){
       return {
-        
+        comments:[],
         lista:[],
         artist:[],
         isloading: false,
@@ -77,6 +87,7 @@ export default {
          }catch(error){
             console.log(error)
             this.isloading= false;
+            
          }
       },
        async getArtist(){ 
@@ -90,10 +101,21 @@ export default {
             this.isloading= false;
          }
       },
-       
+        async getArtistComment(){ 
+         this.isloading = true
+         try{
+            this.comments = await api.getArtistComments(this.$route.params.artistID)
+            console.log(this.comments)
+            this.isloading = false
+         }catch(error){
+            console.log(error)
+            this.isloading= false;
+         }
+      }, 
          callFunctions(){
                this.getPlay();
                this.getArtist()
+               this.getArtistComment()
                
          },
        onCancel() {
@@ -145,12 +167,29 @@ export default {
     margin-bottom: 20px;
     margin-top:20px;
 }
-   .card{
+   .img-artist{
       max-width: 100%;
       height: auto;
       margin-bottom: 10px;
       display: block;
       margin-left: auto;
       margin-right: auto;
+   }
+   .cards{
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      border-radius: 50%;
+         
+   }
+   
+   .caja{
+      display: flex;
+      float:left;
+      width: 300px;
+      height: 450px;
+      margin-right: 50px;
+      margin-top:25px;
+      
    }
 </style>

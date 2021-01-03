@@ -34,9 +34,10 @@
          </div>
       </div>
    </div>
- 
+   
 </template>
 <script>
+
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 import * as api from '../api.js';
@@ -46,15 +47,33 @@ export default {
    
    components: {
             Loading
+            
         },
    data: function (){
       return {
+      current: {},
       lista:[],
       isloading: false,
-      fullPage: true
+      fullPage: true,
+      player: new Audio(),
+      isPlaying: false
       }
    },
    methods: {
+      
+      play(song) {
+         if (typeof song.src !== "undefined" && song.id != this.current) {
+            this.current = song;
+            this.player.src = this.current.src;
+         }
+            this.player.play();
+            this.isPlaying = true;
+
+      },
+      pause() {
+            this.player.pause();
+            this.isPlaying = false;
+      },
       getImage(item) {
          return require(item.img);
       },

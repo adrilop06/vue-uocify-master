@@ -46,6 +46,7 @@ Vue.use(VueRouter)
     name: 'artist',
     component: Artist,
   },   
+ 
 ]
 
 const router = new VueRouter({

@@ -36,3 +36,8 @@ export async function getArtistRadio(param){
     let r = await t.json()
     return r.data
 }
+export async function getArtistComments(param){ 
+    let t = await fetch("https://cors-anywhere.herokuapp.com/https://api.deezer.com/artist/" + param + "/comments")
+    let r = await t.json()
+    return r.data
+}
