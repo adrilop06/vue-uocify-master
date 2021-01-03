@@ -4,19 +4,8 @@
         :can-cancel="true" 
         :on-cancel="onCancel"
         :is-full-page="fullPage"></loading>
-    <div>
-        <b-card 
-            overlay
-            img-src="https://picsum.photos/900/250/?image=3"
-            img-alt="Card Image"
-            text-variant="white"
-            title="h"
-            sub-title="Subtitle"
-        >
-            <b-card-text>
-            
-            </b-card-text>
-        </b-card>
+    <div class="col-12" v-for="data in artist.slice(0,1)" v-bind:key="data.id" >
+        <img :src="data.artist.picture_big" :alt="data.title" class=" card"/>
     </div>
       <div class="row">
          <div class="col-md-12 col-12">
@@ -64,16 +53,15 @@ export default {
    
    data: function (){
       return {
-        artist:[],
+        
         lista:[],
+        artist:[],
         isloading: false,
         fullPage: true,
-        n: String
       }
    },
     created() {
-      this.getPlay();
-      this.getArtist();
+      this.callFunctions();
    },
    methods: {
       getImage(item) {
@@ -81,12 +69,9 @@ export default {
       },
 
       async getPlay(){ 
-         this.isLoading = true
+         this.isloading = true
          try{
-            this.lista = await api.getArtistByID(this.$route.params.artistID)
-            for(let i = 0; i<= 1; i++){
-               this.n= this.lista[i].artist.name
-            }
+            this.lista = await api.getArtistTop(this.$route.params.artistID)
             console.log(this.lista)
             this.isloading = false
          }catch(error){
@@ -94,19 +79,23 @@ export default {
             this.isloading= false;
          }
       },
-      async getArtist(){ 
-         this.isLoading = true
-         
+       async getArtist(){ 
+         this.isloading = true
          try{
-            this.artist = await api.getArtist(this.n)
+            this.artist = await api.getArtistRadio(this.$route.params.artistID)
             console.log(this.artist)
-            console.log(this.artistName)
             this.isloading = false
          }catch(error){
             console.log(error)
             this.isloading= false;
          }
       },
+       
+         callFunctions(){
+               this.getPlay();
+               this.getArtist()
+               
+         },
        onCancel() {
               console.log('User cancelled the loader.'),
               this.isloading=false
@@ -156,4 +145,12 @@ export default {
     margin-bottom: 20px;
     margin-top:20px;
 }
+   .card{
+      max-width: 100%;
+      height: auto;
+      margin-bottom: 10px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+   }
 </style>

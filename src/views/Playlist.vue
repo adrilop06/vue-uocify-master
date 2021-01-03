@@ -24,7 +24,7 @@
                         <th>{{ data.title}}</th>
                         <td><router-link v-bind:to="'/artist/'+ data.artist.id">{{ data.artist.name }}</router-link></td>
                         <td>{{ data.album.title }}</td>
-                        <td>{{ data.duration }}</td>
+                        <td>{{ data.duration | duration }}</td>
                         
                      </tr>
                   </tbody>

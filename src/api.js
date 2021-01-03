@@ -26,13 +26,13 @@ export async function getArtists(param){
     let r = await t.json()
     return r.data
 }   
-export async function getArtistByID(param){ 
+export async function getArtistTop(param){ 
     let t = await fetch("https://cors-anywhere.herokuapp.com/https://api.deezer.com/artist/" + param + "/top")
     let r = await t.json()
     return r.data
 }        
-export async function getArtist(param){ 
-    let t = await fetch("https://cors-anywhere.herokuapp.com/https://api.deezer.com/search/artist?q=" + param)
+export async function getArtistRadio(param){ 
+    let t = await fetch("https://cors-anywhere.herokuapp.com/https://api.deezer.com/artist/" + param + "/radio")
     let r = await t.json()
     return r.data
 }
