@@ -3,8 +3,6 @@
         <!-- En función de si el usuario esta logeado o no, mostraremos una cosa u otra -->
         <div class="container"  v-if="this.isLogged==true">
             <img class="logo" src="@/assets/icon.svg" alt="logo">
-            <h1 class="main-title">¿En busca de música?</h1>
-            <p class="lorem-textum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tellus arcu, feugiat eu molestie in, finibus sit amet lorem. Phasellus consectetur ipsum in imperdiet ultrices. </p>
             <playlists></playlists>
         </div>
             

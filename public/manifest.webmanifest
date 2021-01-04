@@ -8,12 +8,7 @@
     "theme_color": "#73EDFF",
     "prefer_related_applications": true,
     "icons": [
-      {
-        "src": "img/icons/favicon-32x32.png",
-        "type": "image/png",
-        "sizes": "32x32",
-        "purpose": "any maskable"
-      },
+     
       {
         "src": "img/icons/favicon-16x16.png",
         "type": "image/png",

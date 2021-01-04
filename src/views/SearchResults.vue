@@ -38,7 +38,7 @@
          <div class="container">
             <img class="logo" src="@/assets/icon.svg" alt="logo">
             <h1 class="main-title">¿Aún no estás registrado?</h1>
-            <p class="lorem-textum">No pierdas más tiempo y registrate!</p>
+            <p class="lorem-textum">¡No pierdas más tiempo y regístrate!</p>
         </div>
         </main>
     </div>
