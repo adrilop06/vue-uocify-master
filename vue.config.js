@@ -16,6 +16,7 @@ module.exports = {
     appleMobileWebAppStatusBarStyle: 'black',
     devServer: { 
       https: true,
+      
       proxy: 'https://api.deezer.com',
     
      }, 
