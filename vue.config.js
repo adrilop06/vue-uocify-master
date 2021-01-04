@@ -14,7 +14,12 @@ module.exports = {
     msTileColor: '#222222',
     appleMobileWebAppCapable: 'yes',
     appleMobileWebAppStatusBarStyle: 'black',
-    devServer: { https: true }, 
+    devServer: { 
+      https: true,
+      devServer: {
+      proxy: 'https://api.deezer.com',
+    }
+     }, 
     // configure the workbox plugin
     workboxPluginMode: 'InjectManifest',
     workboxOptions: {  
