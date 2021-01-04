@@ -4,6 +4,7 @@
         <div class="container"  v-if="this.isLogged==true">
             <img class="logo" src="@/assets/icon.svg" alt="logo">
             <playlists></playlists>
+            
         </div>
             
         <div v-else>
