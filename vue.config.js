@@ -16,9 +16,8 @@ module.exports = {
     appleMobileWebAppStatusBarStyle: 'black',
     devServer: { 
       https: true,
-      devServer: {
       proxy: 'https://api.deezer.com',
-    }
+    
      }, 
     // configure the workbox plugin
     workboxPluginMode: 'InjectManifest',
