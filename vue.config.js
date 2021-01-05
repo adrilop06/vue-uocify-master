@@ -16,8 +16,8 @@ module.exports = {
     appleMobileWebAppStatusBarStyle: 'black',
     devServer: { 
       https: true,
-      
-      proxy: 'https://api.deezer.com',
+      headers: { 'Access-Control-Allow-Origin': '*' },
+     
     
      }, 
     // configure the workbox plugin
