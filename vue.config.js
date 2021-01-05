@@ -24,6 +24,7 @@ module.exports = {
     workboxPluginMode: 'InjectManifest',
     workboxOptions: {  
       swSrc: '@/src/registerServiceWorker.js',
+      
     },
     iconPaths:{
       favicon32: 'public/img/icons/favicon-32x32.png',

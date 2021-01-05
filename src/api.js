@@ -1,8 +1,7 @@
 
 
 export async function getPlayLists(){ 
-  
-    let t = await fetch("https://api.deezer.com/chart/0/playlists")
+  let t = await fetch("https://api.deezer.com/chart/0/playlists")
     let r = await t.json()
     return r.data
 }
