@@ -2,13 +2,13 @@
 
 export async function getPlayLists(){ 
   
-    let t = await fetch("https://api.deezer.com/chart/0/playlists")
+    let t = await fetch("http://localhost:8080/chart/0/playlists")
     let r = await t.json()
     return r.data
 }
 
 export async function getPlayList(param){ 
-    let t = await fetch("https://api.deezer.com/playlist/" + param + "/tracks")
+    let t = await fetch("http://localhost:8080/playlist/" + param + "/tracks")
     let r = await t.json()
     return r.data
 }
