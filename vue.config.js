@@ -15,15 +15,15 @@ module.exports = {
     appleMobileWebAppCapable: 'yes',
     appleMobileWebAppStatusBarStyle: 'black',
     devServer: { 
-     
-      
-      proxy: 'https://api.deezer.com',
+      https: true,
+       proxy: 'https://api.deezer.com',
+       headers: { 'Access-Control-Allow-Origin': '*' }
     
      }, 
     // configure the workbox plugin
     workboxPluginMode: 'InjectManifest',
     workboxOptions: {  
-      swSrc: 'src/registerServiceWorker.js',
+      swSrc: '@/src/registerServiceWorker.js',
     },
     iconPaths:{
       favicon32: 'public/img/icons/favicon-32x32.png',
