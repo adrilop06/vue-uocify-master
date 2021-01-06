@@ -25,11 +25,11 @@ module.exports = {
       swSrc: 'src/service-worker.js',
     },
     iconPaths:{
-      favicon32: 'public/img/icons/favicon-32x32.png',
-      favicon16: 'public/img/icons/favicon-16x16.png',
-      appleTouchIcon: 'public/img/icons/apple-touch-icon-152x152.png',
-      maskIcon: 'public/img/icons/mstile-150x150.png',
-      msTileImage: 'public/img/icons/msapplication-icon-144x144.png'
+      favicon32: './public/img/icons/favicon-32x32.png',
+      favicon16: './public/img/icons/favicon-16x16.png',
+      appleTouchIcon: './public/img/icons/apple-touch-icon-152x152.png',
+      maskIcon: './public/img/icons/mstile-150x150.png',
+      msTileImage: './public/img/icons/msapplication-icon-144x144.png'
     },
    
     
