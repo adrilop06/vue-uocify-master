@@ -23,7 +23,7 @@ module.exports = {
     // configure the workbox plugin
     workboxPluginMode: 'InjectManifest',
     workboxOptions: {  
-      swSrc: 'src/registerServiceWorker.js',
+      swSrc: 'registerServiceWorker.js',
     },
     iconPaths:{
       favicon32: 'public/img/icons/favicon-32x32.png',
