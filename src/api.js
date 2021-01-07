@@ -1,5 +1,6 @@
 
-
+//hacemos las llamadas a la api usando https. Empleamos una función asincrona con un await que espera
+//a que se retorne valores de la api y los convertimos a formato json
 export async function getPlayLists(){
   let t = await fetch("https://cors-anywhere.herokuapp.com/https://api.deezer.com/chart/0/playlists")
     let r = await t.json()

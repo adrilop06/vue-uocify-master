@@ -59,7 +59,7 @@ export default {
       lista:[],
       
       /*variables que manejarán la animación de loading */
-      isloading: false,
+      isloading: true,
       fullPage: true,
       }
    },
@@ -71,7 +71,7 @@ export default {
       /* Esta función utilizará la función contenida en la api insertandole los parametros
       de playlistID, los cuales se obtendrán mediante el router al hacer click en la lista */
       async getPlay(){ 
-         this.isLoading = true
+         
          try{
          this.lista = await api.getPlayList(this.$route.params.playlistID)
          console.log(this.lista)
@@ -83,7 +83,7 @@ export default {
       },
       
        onCancel() {
-              console.log('User cancelled the loader.'),
+              
               this.isloading=false
             }
      
